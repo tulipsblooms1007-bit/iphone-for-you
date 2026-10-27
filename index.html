@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a little world for you ♡</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#e8e6e1;color:#292929;font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.phone{width:340px;height:min(700px,88vh);min-height:560px;background:#f8f7f3;border:7px solid #202020;border-radius:42px;position:relative;overflow:hidden;box-shadow:0 20px 55px #0003}
+.island{position:absolute;z-index:5;top:10px;left:50%;transform:translateX(-50%);width:92px;height:24px;border-radius:20px;background:#050505}
+.status{position:absolute;z-index:6;top:14px;left:20px;right:20px;display:flex;justify-content:space-between;font-size:11px;font-weight:bold}
+.screen{position:absolute;inset:0;padding:55px 18px 30px;overflow-y:auto}
+.lock{background:linear-gradient(#0002,#0005),url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=700&q=80') center/cover;color:white;display:flex;flex-direction:column;align-items:center;text-align:center;touch-action:pan-y;user-select:none}
+.lock .date{margin-top:48px;font-size:13px}
+.clock{font-size:76px;letter-spacing:-4px;font-weight:300;margin:4px 0}
+.notif{margin-top:25px;background:#ffffffdc;color:#222;border-radius:15px;padding:13px;text-align:left;width:100%;font-size:12px;line-height:1.6}
+.unlock{margin-top:auto;padding:20px;font-size:13px;cursor:pointer;animation:bob 1.5s infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.home{background:linear-gradient(160deg,#f7f6f2,#ddd9d1)}
+.widgets{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;margin-top:22px}
+.widget{background:#ffffffb8;border-radius:17px;padding:13px;min-height:95px;display:flex;flex-direction:column;justify-content:center;gap:7px}
+.widget strong{font-size:22px;font-weight:500}
+.widget small{font-size:10px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px 8px;margin-top:35px}
+.app{border:0;background:none;color:#222;display:flex;align-items:center;flex-direction:column;gap:6px;cursor:pointer}
+.appicon{width:53px;height:53px;border-radius:15px;background:#fff;display:grid;place-items:center;font-size:27px;box-shadow:0 3px 10px #0001}
+.app small{font-size:11px}
+.dock{position:absolute;bottom:27px;left:13px;right:13px;padding:13px;border-radius:22px;background:#ffffffa8;display:flex;justify-content:space-around;font-size:23px}
+.bar{position:absolute;z-index:8;bottom:7px;left:50%;transform:translateX(-50%);height:4px;width:90px;border-radius:9px;background:#222;cursor:pointer}
+.lock~.bar{background:white}
+.appscreen{background:#faf9f6;padding-top:53px}
+.apphead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd;padding:8px 0 15px;font-size:13px}
+.back{border:0;background:none;color:#777;cursor:pointer;padding:0}
+.content{padding-top:20px;font-size:14px;line-height:1.8;white-space:pre-line}
+.content h2{font-weight:500;font-size:26px;line-height:1.3}
+.content p{color:#666}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.photos img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:5px}
+.bubble{padding:10px 13px;border-radius:15px;margin:12px 0;background:#e8e6e1;max-width:90%}
+.mine{background:#c9d8ca;margin-left:auto}
+.paper{background:white;padding:18px;border-radius:12px}
+.playlist{background:#e7e2d9;border-radius:15px;padding:18px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+<div class="island"></div>
+<div class="status"><span id="smalltime">21:05</span><span>● ▰ ▰</span></div>
+
+<section class="screen lock" id="lock">
+<div class="date" id="date">MONDAY, OCTOBER 27</div>
+<div class="clock" id="clock">21:05</div>
+<div class="notif">💬 <b>A little message</b><br>Someone made this just for you. ♡</div>
+<div class="unlock" id="unlock">↑<br>Swipe up to open</div>
+</section>
+
+<section class="screen home" id="home" hidden>
+<div class="widgets">
+<div class="widget"><small>A LITTLE REMINDER</small><strong>you matter.</strong><small>always. ♡</small></div>
+<div class="widget"><small id="month">OCTOBER</small><strong id="day">27</strong><small>take it easy</small></div>
+</div>
+<div class="grid">
+<button class="app" data-app="photos"><span class="appicon">✿</span><small>Photos</small></button>
+<button class="app" data-app="messages"><span class="appicon">●</span><small>Messages</small></button>
+<button class="app" data-app="notes"><span class="appicon">▤</span><small>Notes</small></button>
+<button class="app" data-app="music"><span class="appicon">♫</span><small>Music</small></button>
+<button class="app" data-app="about"><span class="appicon">♡</span><small>About us</small></button>
+<button class="app" data-app="letter"><span class="appicon">✉</span><small>Letter</small></button>
+</div>
+<div class="dock"><span>☎</span><span>✉</span><span>♫</span></div>
+</section>
+
+<section class="screen appscreen" id="apps" hidden>
+<div class="apphead"><button class="back" id="back">‹ Home</button><b id="apptitle">Photos</b><span>•••</span></div>
+<div class="content" id="content"></div>
+</section>
+<div class="bar" id="bar"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+let unlocked=false,startY=0;
+function update(){
+const d=new Date();
+const t=d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+$('clock').textContent=t;$('smalltime').textContent=t;
+$('date').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}).toUpperCase();
+$('day').textContent=d.getDate();
+$('month').textContent=d.toLocaleDateString('en-US',{month:'long'}).toUpperCase();
+}
+function openPhone(){
+unlocked=true;$('lock').hidden=true;$('home').hidden=false;$('apps').hidden=true;
+}
+function goHome(){
+if(!unlocked){openPhone();return}
+$('apps').hidden=true;$('home').hidden=false;
+}
+$('unlock').onclick=openPhone;
+$('lock').addEventListener('touchstart',e=>startY=e.touches[0].clientY,{passive:true});
+$('lock').addEventListener('touchend',e=>{
+if(startY-e.changedTouches[0].clientY>40)openPhone();
+},{passive:true});
+$('lock').addEventListener('click',e=>{
+if(e.target.id!=='unlock')return;
+openPhone();
+});
+const pages={
+photos:['Photos',`<h2>little memories ♡</h2><p>Some moments deserve to be kept forever.</p><div class="photos">
+<img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=300&q=80" alt="Friends">
+<img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=300&q=80" alt="Friends together">
+<img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=300&q=80" alt="Celebration">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=300&q=80" alt="Memory"></div>`],
+messages:['Messages',`<p style="text-align:center">today ♡</p>
+<div class="bubble">hey, you. i'm glad you're here.</div>
+<div class="bubble mine">who, me? 😭</div>
+<div class="bubble">yes, YOU. just a little reminder that you matter to me.</div>
+<div class="bubble mine">okay wait that's actually so sweet ♡</div>`],
+notes:['Notes',`<div class="paper"><small>♡ A LITTLE NOTE</small><h2>for you.</h2>
+hey, you.
+
+i just wanted to say thank you for being part of my life. thank you for the little moments, the laughs, and the memories we get to keep.
+
+i hope life is gentle with you. on the days it isn't, i hope you remember that you matter more than you think.
+
+— someone who's glad to know you ♡</div>`],
+music:['Music',`<div class="playlist"><div style="font-size:50px">♫</div><small>A PLAYLIST FOR YOU</small><h2>songs that remind me of you</h2><p>Some feelings are easier to say through music.</p><a href="https://open.spotify.com/" target="_blank" rel="noopener">Open Spotify ↗</a></div>`],
+about:['About us',`<h2>our little universe.</h2><p>Different days, random conversations, silly jokes, and memories that somehow became special.</p><p>I'm glad our paths crossed. Here's to more little moments, in whatever shape life gives them. ♡</p>`],
+letter:['Letter',`<div class="paper"><small>OPEN WHEN YOU NEED A REMINDER</small><h2>Dear you,</h2><p>Not every important person needs a grand story. Sometimes, it's enough that they made ordinary days a little better.</p><p>Thank you for being you. Please take care of yourself, okay?</p><p>With lots of appreciation, ♡</p></div>`]
+};
+document.querySelectorAll('[data-app]').forEach(btn=>{
+btn.onclick=()=>{
+const p=pages[btn.dataset.app];
+$('apptitle').textContent=p[0];$('content').innerHTML=p[1];
+$('home').hidden=true;$('apps').hidden=false;$('apps').scrollTop=0;
+};
+});
+$('back').onclick=goHome;$('bar').onclick=goHome;
+update();setInterval(update,15000);
+</script>
+</body>
+</html>
